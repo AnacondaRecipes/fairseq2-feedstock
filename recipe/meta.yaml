@@ -29,16 +29,18 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - ninja
         - cmake
       host:
         - python
         - pip
         - wheel
         - setuptools >=67.8
+        - tbb >=2021.8  # [(linux or osx) and x86_64]
+        - packaging >=23.1
         - pytorch 2.1.0
       run:
         - python
-        - tbb >=2021.8  # [(linux or osx) and x86_64]
         # the version must be the same between extension module and fairseq2 (main module)
         # as per [this comment](https://github.com/facebookresearch/fairseq2/blob/76015a1280d72ef1f94535637579907da929297c/fairseq2n/python/setup.py#L171)
         # the same version as the subpackage fairseq2n should be pinned
