@@ -24,7 +24,12 @@ requirements:
 outputs:
   - name: fairseq2n
     build:
-      script: python -m pip install ./fairseq2n/python -v --no-deps --no-build-isolation
+      script:
+        - cd $SRC_DIR/fairseq2n
+        - cmake -GNinja -B build
+        - cmake --build build
+        - cd $SRC_DIR/fairseq2n/python
+        - python -m pip install . -v --no-deps --no-build-isolation
     requirements:
       build:
         - {{ compiler('c') }}
