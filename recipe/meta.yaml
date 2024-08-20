@@ -1,0 +1,52 @@
+{% set name = "fairseq2" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/facebookresearch/fairseq2
+  git_rev: v0.2.0
+
+build:
+  skip: True  # [py<38]
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - git  # [not win]
+  host:
+    - python
+    - pip
+    - wheel
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - fairseq2
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/facebookresearch/fairseq2
+  summary: |
+    fairseq2 is a sequence modeling toolkit that allows researchers and developers to train custom models for
+    translation, summarization, language modeling, and other content generation tasks. It is also the successor of fairseq.
+  description: |
+    fairseq2 is a sequence modeling toolkit that allows researchers and developers to train custom models for
+    translation, summarization, language modeling, and other content generation tasks. It is also the successor of fairseq.
+  license: MIT
+  license_file: LICENSE
+  license_family: MIT
+  dev_url: https://facebookresearch.github.io/fairseq2/stable
+  doc_url: https://github.com/facebookresearch/fairseq2
+
+extra:
+  recipe-maintainers:
+    - boldorider4
