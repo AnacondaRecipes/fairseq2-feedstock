@@ -11,6 +11,9 @@ source:
 
 build:
   skip: True  # [py<38]
+  # win officially not supported by upstream as per
+  # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
+  skip: True  # [win]
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -24,7 +27,16 @@ requirements:
     - setuptools >=67.8
   run:
     - python
+    - jiwer >=3.0
+    - numpy >=1.23
+    - overrides >=7.3
     - packaging >=23.1
+    - pyyaml >=6.0
+    - sacrebleu >=2.3
+    - torch >=1.12.1
+    - torcheval >=0.0.6
+    - tqdm >=4.62
+    - typing_extensions >=4.3  # [py<310]
 
 test:
   imports:
