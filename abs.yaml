@@ -2,5 +2,5 @@ upload_channels:
   - sfe1ed40
 channels:
   - http://staging.continuum.io/prefect/fs/sacrebleu-feedstock/pr3/a13880d
-  - http://staging.continuum.io/prefect/fs/jiwer-feedstock/pr2/3da8621
+  - http://staging.continuum.io/prefect/fs/jiwer-feedstock/pr2/9c7661a
   - http://staging.continuum.io/prefect/fs/torcheval-feedstock
