@@ -20,31 +20,67 @@ build:
 requirements:
   build:
     - git  # [not win]
-  host:
-    - python
-    - pip
-    - wheel
-    - setuptools >=67.8
-  run:
-    - python
-    - jiwer >=3.0
-    - numpy >=1.23
-    - overrides >=7.3
-    - packaging >=23.1
-    - pyyaml >=6.0
-    - sacrebleu >=2.3
-    - torch >=1.12.1
-    - torcheval >=0.0.6
-    - tqdm >=4.62
-    - typing_extensions >=4.3  # [py<310]
 
-test:
-  imports:
-    - fairseq2
-  commands:
-    - pip check
-  requires:
-    - pip
+outputs:
+  - name: {{ name }}
+    build:
+      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python
+        - pip
+        - wheel
+        - setuptools >=67.8
+      run:
+        - python
+        - jiwer >=3.0
+        - numpy >=1.23
+        - overrides >=7.3
+        - packaging >=23.1
+        - pyyaml >=6.0
+        - sacrebleu >=2.3
+        - torch >=1.12.1
+        - torcheval >=0.0.6
+        - tqdm >=4.62
+        - typing_extensions >=4.3  # [py<310]
+        - {{ pin_subpackage(name + 'n', exact=True) }}
+
+      test:
+        imports:
+          - fairseq2
+        commands:
+          - pip check
+        requires:
+          - pip
+
+  - name: {{ name }}n
+    build:
+      script: {{ PYTHON }} -m pip install ./fairseq2n/python -v --no-deps --no-build-isolation
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+      host:
+        - python
+        - pip
+        - wheel
+        - setuptools >=67.8
+      run:
+        - python
+        - tbb >=2021.8  # [(linux or osx) and x86_64]
+        # the version must be the same between extension module and fairseq2 (main module)
+        # as per [this comment](https://github.com/facebookresearch/fairseq2/blob/76015a1280d72ef1f94535637579907da929297c/fairseq2n/python/setup.py#L171)
+        # the same version as the subpackage fairseq2n should be pinned
+        - pytorch >=1.12.1
+
+      test:
+        imports:
+          - fairseq2n
+        commands:
+          - pip check
+        requires:
+          - pip
 
 about:
   home: https://github.com/facebookresearch/fairseq2
