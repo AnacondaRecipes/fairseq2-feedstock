@@ -21,9 +21,10 @@ requirements:
     - python
     - pip
     - wheel
-    - setuptools
+    - setuptools >=67.8
   run:
     - python
+    - packaging >=23.1
 
 test:
   imports:
