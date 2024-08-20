@@ -15,7 +15,6 @@ build:
   # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
   skip: True  # [win]
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
@@ -24,7 +23,7 @@ requirements:
 outputs:
   - name: {{ name }}
     build:
-      script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      script: python -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
         - python
@@ -55,7 +54,7 @@ outputs:
 
   - name: {{ name }}n
     build:
-      script: {{ PYTHON }} -m pip install ./fairseq2n/python -v --no-deps --no-build-isolation
+      script: python -m pip install ./fairseq2n/python -v --no-deps --no-build-isolation
     requirements:
       build:
         - {{ compiler('c') }}
