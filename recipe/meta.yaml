@@ -8,6 +8,8 @@ package:
 source:
   git_url: https://github.com/facebookresearch/fairseq2
   git_rev: v0.2.0
+  patches:
+    - 0001-make-build-dir-before-building.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1
@@ -20,6 +22,8 @@ build:
 requirements:
   build:
     - git  # [not win]
+    - patch  # [not win]
+    - m2-patch  # [win]
 
 outputs:
   - name: fairseq2n
