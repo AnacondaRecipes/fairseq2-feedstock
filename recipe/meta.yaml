@@ -70,7 +70,7 @@ outputs:
         - torcheval >=0.0.6
         - tqdm >=4.62
         - typing_extensions >=4.3  # [py<310]
-        - {{ pin_subpackage("fairseq2n", exact=True) }}
+        - {{ pin_subpackage('fairseq2n', exact=True) }}
 
       test:
         imports:
