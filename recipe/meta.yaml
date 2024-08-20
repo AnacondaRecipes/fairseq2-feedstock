@@ -10,7 +10,8 @@ source:
   git_rev: v0.2.0
 
 build:
-  skip: True  # [py<38]
+  # skip py312 because it's supported only from 0.2.1
+  skip: True  # [py<38 or py>311]
   # win officially not supported by upstream as per
   # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
   skip: True  # [win]
@@ -34,13 +35,14 @@ outputs:
         - pip
         - wheel
         - setuptools >=67.8
+        - pytorch 2.1.0
       run:
         - python
         - tbb >=2021.8  # [(linux or osx) and x86_64]
         # the version must be the same between extension module and fairseq2 (main module)
         # as per [this comment](https://github.com/facebookresearch/fairseq2/blob/76015a1280d72ef1f94535637579907da929297c/fairseq2n/python/setup.py#L171)
         # the same version as the subpackage fairseq2n should be pinned
-        - pytorch >=1.12.1
+        - pytorch 2.1.0
 
       test:
         imports:
