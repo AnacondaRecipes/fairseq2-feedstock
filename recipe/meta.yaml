@@ -21,38 +21,7 @@ requirements:
     - git  # [not win]
 
 outputs:
-  - name: {{ name }}
-    build:
-      script: python -m pip install . -vv --no-deps --no-build-isolation
-    requirements:
-      host:
-        - python
-        - pip
-        - wheel
-        - setuptools >=67.8
-      run:
-        - python
-        - jiwer >=3.0
-        - numpy >=1.23
-        - overrides >=7.3
-        - packaging >=23.1
-        - pyyaml >=6.0
-        - sacrebleu >=2.3
-        - torch >=1.12.1
-        - torcheval >=0.0.6
-        - tqdm >=4.62
-        - typing_extensions >=4.3  # [py<310]
-        - {{ pin_subpackage(name + 'n', exact=True) }}
-
-      test:
-        imports:
-          - fairseq2
-        commands:
-          - pip check
-        requires:
-          - pip
-
-  - name: {{ name }}n
+  - name: fairseq2n
     build:
       script: python -m pip install ./fairseq2n/python -v --no-deps --no-build-isolation
     requirements:
@@ -76,6 +45,36 @@ outputs:
       test:
         imports:
           - fairseq2n
+        commands:
+          - pip check
+        requires:
+          - pip
+
+  - name: {{ name }}
+    build:
+      script: python -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python
+        - pip
+        - wheel
+        - setuptools >=67.8
+      run:
+        - python
+        - jiwer >=3.0
+        - numpy >=1.23
+        - overrides >=7.3
+        - packaging >=23.1
+        - pyyaml >=6.0
+        - sacrebleu >=2.3
+        - torcheval >=0.0.6
+        - tqdm >=4.62
+        - typing_extensions >=4.3  # [py<310]
+        - {{ pin_subpackage("fairseq2n", exact=True) }}
+
+      test:
+        imports:
+          - fairseq2
         commands:
           - pip check
         requires:
