@@ -81,8 +81,7 @@ outputs:
         - packaging >=23.1
         - pyyaml >=6.0
         - sacrebleu >=2.3
-        # CMakeLists.txt wants 1.13
-        - pytorch >=1.13
+        - pytorch >=1.12.1
         - torcheval >=0.0.6
         - tqdm >=4.62
         - typing_extensions >=4.3  # [py<310]
