@@ -24,6 +24,11 @@ requirements:
 outputs:
   - name: fairseq2n
     script: build_fairseq2n.sh  # [not win]
+    build:
+      missing_dso_whitelist:
+        - $RPATH/libtorch_cpu.so     # [linux]
+        - $RPATH/libtorch_python.so  # [linux]
+        - $RPATH/libc10.so           # [linux]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -68,7 +73,6 @@ outputs:
         - pip
         - wheel
         - setuptools >=67.8
-        #- {{ pin_subpackage('fairseq2n', exact=True) }}
       run:
         - python
         - jiwer >=3.0
