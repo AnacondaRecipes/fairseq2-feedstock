@@ -19,6 +19,8 @@ build:
     - $RPATH/libtorch_cpu.so     # [linux]
     - $RPATH/libtorch_python.so  # [linux]
     - $RPATH/libc10.so           # [linux]
+  ignore_run_exports:
+    - fmt
   number: 0
 
 requirements:
