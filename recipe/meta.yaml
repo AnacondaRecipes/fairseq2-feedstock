@@ -15,85 +15,55 @@ build:
   # win officially not supported by upstream as per
   # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
   skip: True  # [win]
+  missing_dso_whitelist:
+    - $RPATH/libtorch_cpu.so     # [linux]
+    - $RPATH/libtorch_python.so  # [linux]
+    - $RPATH/libc10.so           # [linux]
   number: 0
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - ninja
+    - cmake
     - git  # [not win]
+  host:
+    - python
+    - pip
+    - wheel
+    - setuptools >=67.8
+    - tbb-devel >=2021.8  # [(linux or osx) and x86_64]
+    - packaging >=23.1
+    - pytorch 2.1.0
+    - libsndfile
+    - pybind11
+    - pip
+    - wheel
+    - setuptools >=67.8
+    # unvendored host dependencies
+    - fmt
+    - sentencepiece
+  run:
+    - python
+    - jiwer >=3.0
+    - numpy >=1.23
+    - overrides >=7.3
+    - packaging >=23.1
+    - pyyaml >=6.0
+    - sacrebleu >=2.3
+    - pytorch >=1.12.1
+    - torcheval >=0.0.6
+    - tqdm >=4.62
+    - typing_extensions >=4.3  # [py<310]
 
-outputs:
-  - name: fairseq2n
-    script: build_fairseq2n.sh  # [not win]
-    build:
-      missing_dso_whitelist:
-        - $RPATH/libtorch_cpu.so     # [linux]
-        - $RPATH/libtorch_python.so  # [linux]
-        - $RPATH/libc10.so           # [linux]
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - ninja
-        - cmake
-        - pytorch 2.1.0
-        - pip
-        - fmt
-        - sentencepiece
-      host:
-        - python
-        - pip
-        - wheel
-        - setuptools >=67.8
-        - tbb-devel >=2021.8  # [(linux or osx) and x86_64]
-        - packaging >=23.1
-        - pytorch 2.1.0
-        - libsndfile
-        - pybind11
-      run:
-        - python
-        # the version must be the same between extension module and fairseq2 (main module)
-        # as per [this comment](https://github.com/facebookresearch/fairseq2/blob/76015a1280d72ef1f94535637579907da929297c/fairseq2n/python/setup.py#L171)
-        # the same version as the subpackage fairseq2n should be pinned
-        - pytorch 2.1.0
-
-      test:
-        imports:
-          - fairseq2n
-        commands:
-          - pip check
-        requires:
-          - pip
-
-  - name: {{ name }}
-    build:
-      script: python -m pip install . -vv --no-deps --no-build-isolation
-    requirements:
-      host:
-        - python
-        - pip
-        - wheel
-        - setuptools >=67.8
-      run:
-        - python
-        - jiwer >=3.0
-        - numpy >=1.23
-        - overrides >=7.3
-        - packaging >=23.1
-        - pyyaml >=6.0
-        - sacrebleu >=2.3
-        - pytorch >=1.12.1
-        - torcheval >=0.0.6
-        - tqdm >=4.62
-        - typing_extensions >=4.3  # [py<310]
-        - {{ pin_subpackage('fairseq2n', exact=True) }}
-
-      test:
-        imports:
-          - fairseq2
-        commands:
-          - pip check
-        requires:
-          - pip
+  test:
+    imports:
+      - fairseq2
+    commands:
+      - pip check
+    requires:
+      - pip
 
 about:
   home: https://github.com/facebookresearch/fairseq2

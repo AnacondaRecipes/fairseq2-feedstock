@@ -13,5 +13,5 @@ cmake --build build
 cd %SRC_DIR%\fairseq2n\python
 %PYTHON% -m pip install . -v --no-deps --no-build-isolation
 
-@REM cd %SRC_DIR%
-@REM %PYTHON% -m pip install . -v --no-deps --no-build-isolation
+cd %SRC_DIR%
+%PYTHON% -m pip install . -v --no-deps --no-build-isolation
