@@ -22,8 +22,13 @@ build:
     - $RPATH/libtorch_cpu.so     # [linux]
     - $RPATH/libtorch_python.so  # [linux]
     - $RPATH/libc10.so           # [linux]
+    - $RPATH/libtorch_cpu.dylib     # [osx]
+    - $RPATH/libtorch_python.dylib  # [osx]
+    - $RPATH/libc10.dylib           # [osx]
+    - "**/libsndfile.*.dylib"       # [osx]
   ignore_run_exports:
     - fmt
+    - libsndfile
   number: 0
 
 requirements:
@@ -63,6 +68,7 @@ requirements:
     - torcheval >=0.0.6
     - tqdm >=4.62
     - typing_extensions >=4.3  # [py<310]
+    - libiconv  # [osx]
 
   test:
     imports:
