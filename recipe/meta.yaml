@@ -12,6 +12,7 @@ source:
     - 0001-use-host-env-python.patch
     - 0002-fix-unsupported-linker-option.patch
     - 0003-unvendor-fmt.patch
+    - 0004-unvendor-sentencepiece.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1
@@ -55,7 +56,7 @@ requirements:
     - setuptools >=67.8
     # unvendored host dependencies
     - fmt
-    - sentencepiece
+    - libsentencepiece
   run:
     - python
     - jiwer >=3.0
@@ -67,6 +68,7 @@ requirements:
     - pytorch >=1.12.1
     - torcheval >=0.0.6
     - tqdm >=4.62
+    - libsentencepiece
     - typing_extensions >=4.3  # [py<310]
     - libiconv  # [osx]
 
