@@ -13,6 +13,7 @@ source:
     - 0002-fix-unsupported-linker-option.patch
     - 0003-unvendor-fmt.patch
     - 0004-unvendor-sentencepiece.patch
+    - 0005-discover-zip-headers.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1
