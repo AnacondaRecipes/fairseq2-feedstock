@@ -51,9 +51,6 @@ requirements:
     - pytorch 2.1.0
     - libsndfile
     - pybind11
-    - pip
-    - wheel
-    - setuptools >=67.8
     # unvendored host dependencies
     - fmt
     - libsentencepiece
