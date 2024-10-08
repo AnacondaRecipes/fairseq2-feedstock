@@ -28,7 +28,6 @@ build:
     - $RPATH/libc10.dylib           # [osx]
     - "**/libsndfile.*.dylib"       # [osx]
   ignore_run_exports:
-    - fmt
     - libsndfile
   number: 0
 

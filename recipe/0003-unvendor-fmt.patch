@@ -1,41 +1,35 @@
-From fa7e6c22ee6d979302251402abf4e26ccd045652 Mon Sep 17 00:00:00 2001
+From 703d0aa579fdc2c1ad7288a6e8079fa388960f34 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Tue, 8 Oct 2024 10:21:17 +0200
 Subject: [PATCH] unvendor fmt
 
 ---
- fairseq2n/CMakeLists.txt                            | 13 ++++++++++++-
- .../python/src/fairseq2n/bindings/CMakeLists.txt    |  3 ++-
- fairseq2n/src/fairseq2n/CMakeLists.txt              |  2 +-
- fairseq2n/third-party/CMakeLists.txt                |  2 +-
- 4 files changed, 16 insertions(+), 4 deletions(-)
+ fairseq2n/CMakeLists.txt                               | 7 ++++++-
+ fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt | 3 ++-
+ fairseq2n/src/fairseq2n/CMakeLists.txt                 | 2 +-
+ fairseq2n/third-party/CMakeLists.txt                   | 2 +-
+ 4 files changed, 10 insertions(+), 4 deletions(-)
 
 diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
-index 54743625..3789f68a 100644
+index 54743625..18112406 100644
 --- a/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/CMakeLists.txt
-@@ -183,7 +183,18 @@ endif()
+@@ -183,7 +183,12 @@ endif()
  
  add_subdirectory(third-party)
  
 -fairseq2n_add_fmt()
 +# fairseq2n_add_fmt()
 +
-+# Find the fmt library
-+find_library(FMT_LIBRARY fmt PATHS $ENV{PREFIX}/lib)
-+message(STATUS "found FMT_LIBRARY at ${FMT_LIBRARY}")
++set(CMAKE_LIBRARY_PATH "$ENV{PREFIX}/lib")
++set(CMAKE_INCLUDE_PATH "$ENV{PREFIX}/include")
 +
-+# Find the include directory for fmt
-+find_path(FMT_INCLUDE_DIR fmt/core.h PATHS $ENV{PREFIX}/include)
-+message(STATUS "found FMT_INCLUDE_DIR at ${FMT_INCLUDE_DIR}")
-+
-+# Set the include directories
-+include_directories(${FMT_INCLUDE_DIR})
++find_package(fmt REQUIRED)
  
  fairseq2n_add_kaldi_native_fbank()
  
 diff --git a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
-index 2a7d1e52..be396ffa 100644
+index 2a7d1e52..da0455e5 100644
 --- a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
 +++ b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
 @@ -36,7 +36,8 @@ target_include_directories(py_bindings PRIVATE ${PROJECT_SOURCE_DIR}/python/src)
@@ -44,12 +38,12 @@ index 2a7d1e52..be396ffa 100644
      PRIVATE
 -        pybind11::module fmt::fmt kuba-zip fairseq2n torch_python
 +        #pybind11::module fmt::fmt kuba-zip fairseq2n torch_python
-+        pybind11::module ${FMT_LIBRARY} kuba-zip fairseq2n torch_python
++        pybind11::module fmt kuba-zip fairseq2n torch_python
  )
  
  fairseq2n_set_link_options(py_bindings ALLOW_UNDEFINED_SYMBOLS)
 diff --git a/fairseq2n/src/fairseq2n/CMakeLists.txt b/fairseq2n/src/fairseq2n/CMakeLists.txt
-index 9f752d58..9e03b08e 100644
+index 9f752d58..8e959e9f 100644
 --- a/fairseq2n/src/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/src/fairseq2n/CMakeLists.txt
 @@ -106,7 +106,7 @@ target_link_libraries(fairseq2n
@@ -57,7 +51,7 @@ index 9f752d58..9e03b08e 100644
          ${CMAKE_DL_LIBS}
      PRIVATE
 -        fmt::fmt
-+        ${FMT_LIBRARY}
++        fmt
          Iconv::Iconv
          kaldi-native-fbank::core
          kuba-zip
@@ -75,5 +69,5 @@ index 413b0577..839d991e 100644
  include(kaldi-native-fbank.cmake)
  include(natsort.cmake)
 -- 
-2.45.2
+2.39.5 (Apple Git-154)
 
