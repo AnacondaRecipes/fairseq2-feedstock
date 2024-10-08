@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-use-host-env-python.patch
     - 0002-fix-unsupported-linker-option.patch
+    - 0003-unvendor-fmt.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1

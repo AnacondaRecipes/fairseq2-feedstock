@@ -1,0 +1,39 @@
+From 096a0e4e27e989797ce07d626c729e2b93fe1b3a Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Tue, 8 Oct 2024 10:21:17 +0200
+Subject: [PATCH] unvendor fmt
+
+---
+ fairseq2n/CMakeLists.txt             | 2 +-
+ fairseq2n/third-party/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
+index 54743625..11127285 100644
+--- a/fairseq2n/CMakeLists.txt
++++ b/fairseq2n/CMakeLists.txt
+@@ -183,7 +183,7 @@ endif()
+ 
+ add_subdirectory(third-party)
+ 
+-fairseq2n_add_fmt()
++# fairseq2n_add_fmt()
+ 
+ fairseq2n_add_kaldi_native_fbank()
+ 
+diff --git a/fairseq2n/third-party/CMakeLists.txt b/fairseq2n/third-party/CMakeLists.txt
+index 413b0577..839d991e 100644
+--- a/fairseq2n/third-party/CMakeLists.txt
++++ b/fairseq2n/third-party/CMakeLists.txt
+@@ -4,7 +4,7 @@
+ # This source code is licensed under the BSD-style license found in the
+ # LICENSE file in the root directory of this source tree.
+ 
+-include(fmt.cmake)
++#include(fmt.cmake)
+ include(gtest.cmake)
+ include(kaldi-native-fbank.cmake)
+ include(natsort.cmake)
+-- 
+2.39.5 (Apple Git-154)
+
