@@ -48,7 +48,7 @@ requirements:
     - setuptools >=67.8
     - tbb-devel >=2021.8  # [(linux or osx) and x86_64]
     - packaging >=23.1
-    - pytorch 2.1.0
+    - pytorch 2.3.0
     - libsndfile
     - pybind11
     # unvendored host dependencies
