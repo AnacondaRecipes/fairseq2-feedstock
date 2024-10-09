@@ -11,6 +11,9 @@ case $SUBDIR in
     ;;
 esac
 
+# unvendoring sentencepiece
+rm -rf $SRC_DIR/fairseq2n/third-party/sentencepiece
+
 cmake \
     -DTORCH_LIBRARY=$PREFIX/lib/python${PY_VER}/site-packages/torch/lib/libtorch.${extension} \
     -DTORCH_CPU_LIBRARY=$PREFIX/lib/python${PY_VER}/site-packages/torch/lib/libtorch_cpu.${extension} \

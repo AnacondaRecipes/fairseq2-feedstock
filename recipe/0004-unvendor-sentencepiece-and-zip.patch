@@ -1,13 +1,14 @@
-From e55f32ac68169b6d09dd6b2386c48d167d5269f4 Mon Sep 17 00:00:00 2001
+From 35f3599d4e5301896d5d7151ede5fd326aafa1d2 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
-Date: Tue, 8 Oct 2024 11:56:00 +0200
-Subject: [PATCH] unvendor sentencepiece
+Date: Wed, 9 Oct 2024 09:40:04 +0200
+Subject: [PATCH] unvendor-sentencepiece and zip
 
 ---
  fairseq2n/CMakeLists.txt                                       | 2 +-
- fairseq2n/src/fairseq2n/CMakeLists.txt                         | 2 ++
+ fairseq2n/src/fairseq2n/CMakeLists.txt                         | 3 +++
+ .../src/fairseq2n/data/text/sentencepiece/sp_processor.cc      | 2 +-
  fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.h | 2 +-
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ 4 files changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
 index 18112406..2c17461c 100644
@@ -23,18 +24,32 @@ index 18112406..2c17461c 100644
  fairseq2n_add_zip()
  
 diff --git a/fairseq2n/src/fairseq2n/CMakeLists.txt b/fairseq2n/src/fairseq2n/CMakeLists.txt
-index 8e959e9f..dc99d3d5 100644
+index 8e959e9f..068d9f63 100644
 --- a/fairseq2n/src/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/src/fairseq2n/CMakeLists.txt
-@@ -102,6 +102,8 @@ target_include_directories(fairseq2n ${system}
+@@ -102,6 +102,9 @@ target_include_directories(fairseq2n ${system}
          $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/src>
  )
  
 +target_include_directories(fairseq2n PRIVATE $ENV{PREFIX}/include)
++target_include_directories(fairseq2n PRIVATE $ENV{SRC_DIR}/fairseq2n/third-party)
 +
  target_link_libraries(fairseq2n
      PRIVATE
          ${CMAKE_DL_LIBS}
+diff --git a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc b/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc
+index 1792fc23..73f4af01 100644
+--- a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc
++++ b/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc
+@@ -10,7 +10,7 @@
+ #include <system_error>
+ 
+ #include <fmt/format.h>
+-#include <sentencepiece/src/builtin_pb/sentencepiece_model.pb.h>
++#include "sentencepiece_model.pb.h"
+ 
+ #include "fairseq2n/detail/exception.h"
+ #include "fairseq2n/utils/cast.h"
 diff --git a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.h b/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.h
 index 634ce8cb..bafd9deb 100644
 --- a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.h
