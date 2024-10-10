@@ -14,6 +14,7 @@ source:
     - 0003-unvendor-fmt.patch
     - 0004-unvendor-sentencepiece-and-zip.patch
     - 0005-unvendor-pybind11.patch
+    - 0006-unvendor-gtest.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1
@@ -31,6 +32,8 @@ build:
     - "**/libsndfile.*.dylib"       # [osx]
   ignore_run_exports:
     - libsndfile
+    # gtest is only used to generate the 'tests' CMake targets
+    - gtest
   number: 0
 
 requirements:
@@ -51,11 +54,12 @@ requirements:
     - packaging 24.1
     - pytorch 2.3.0
     - libsndfile 1.2.2
-    - pybind11 2.12.0
     # unvendored host dependencies
     - fmt 9.1.0
     - libsentencepiece 0.2.0
     - libprotobuf 4.25.3
+    - pybind11 2.12.0
+    - gtest 1.14.0
   run:
     - python
     - jiwer >=3.0
