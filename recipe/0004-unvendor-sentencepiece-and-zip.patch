@@ -1,14 +1,14 @@
-From 35f3599d4e5301896d5d7151ede5fd326aafa1d2 Mon Sep 17 00:00:00 2001
+From 4c27f05595d657ba1d27f6bdaeff8d0ca81e04ae Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Wed, 9 Oct 2024 09:40:04 +0200
-Subject: [PATCH] unvendor-sentencepiece and zip
+Subject: [PATCH 4/4] unvendor-sentencepiece and zip
 
 ---
- fairseq2n/CMakeLists.txt                                       | 2 +-
- fairseq2n/src/fairseq2n/CMakeLists.txt                         | 3 +++
- .../src/fairseq2n/data/text/sentencepiece/sp_processor.cc      | 2 +-
- fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.h | 2 +-
- 4 files changed, 6 insertions(+), 3 deletions(-)
+ fairseq2n/CMakeLists.txt                                    | 2 +-
+ fairseq2n/src/fairseq2n/CMakeLists.txt                      | 6 +++++-
+ .../src/fairseq2n/data/text/sentencepiece/sp_processor.cc   | 2 +-
+ .../src/fairseq2n/data/text/sentencepiece/sp_processor.h    | 2 +-
+ 4 files changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
 index 18112406..2c17461c 100644
@@ -24,7 +24,7 @@ index 18112406..2c17461c 100644
  fairseq2n_add_zip()
  
 diff --git a/fairseq2n/src/fairseq2n/CMakeLists.txt b/fairseq2n/src/fairseq2n/CMakeLists.txt
-index 8e959e9f..068d9f63 100644
+index 8e959e9f..046c3eef 100644
 --- a/fairseq2n/src/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/src/fairseq2n/CMakeLists.txt
 @@ -102,6 +102,9 @@ target_include_directories(fairseq2n ${system}
@@ -37,6 +37,16 @@ index 8e959e9f..068d9f63 100644
  target_link_libraries(fairseq2n
      PRIVATE
          ${CMAKE_DL_LIBS}
+@@ -112,7 +115,8 @@ target_link_libraries(fairseq2n
+         kuba-zip
+         natsort
+         Threads::Threads
+-        sentencepiece-static
++        sentencepiece
++        protobuf
+         SndFile::sndfile
+     PUBLIC
+         torch
 diff --git a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc b/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc
 index 1792fc23..73f4af01 100644
 --- a/fairseq2n/src/fairseq2n/data/text/sentencepiece/sp_processor.cc
