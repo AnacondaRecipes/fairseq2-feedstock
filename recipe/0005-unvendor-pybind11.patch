@@ -1,31 +1,26 @@
-From f1465c1a1fac72ecd6c3fb2d790fa74e3040f632 Mon Sep 17 00:00:00 2001
+From 59a8fcab33faa4bff1c6bd1353ca3327f42f282d Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Thu, 10 Oct 2024 21:01:34 +0200
-Subject: [PATCH] unvendor pybind11
+Subject: [PATCH 5/8] unvendor pybind11
 
 ---
- fairseq2n/CMakeLists.txt | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ fairseq2n/CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
-index 2c17461c..8022c0c3 100644
+index 2c17461c..09607619 100644
 --- a/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/CMakeLists.txt
-@@ -198,9 +198,11 @@ fairseq2n_add_natsort()
- 
+@@ -199,7 +199,8 @@ fairseq2n_add_natsort()
  fairseq2n_add_zip()
  
--if(FAIRSEQ2N_BUILD_PYTHON_BINDINGS)
+ if(FAIRSEQ2N_BUILD_PYTHON_BINDINGS)
 -    fairseq2n_add_pybind11()
--endif()
-+# if(FAIRSEQ2N_BUILD_PYTHON_BINDINGS)
-+#     fairseq2n_add_pybind11()
-+# endif()
-+
-+find_package(pybind11)
++    # fairseq2n_add_pybind11()
++    find_package(pybind11 REQUIRED)
+ endif()
  
  if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
-     fairseq2n_add_gtest()
 -- 
 2.39.5 (Apple Git-154)
 

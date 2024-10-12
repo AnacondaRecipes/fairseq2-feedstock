@@ -1,7 +1,7 @@
-From 76debdfdb5e9f475cc2310bed3573b4abfdfdc66 Mon Sep 17 00:00:00 2001
+From a9a87078f91d832230f67b62e3e95fb1eb06b6e8 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
-Date: Fri, 4 Oct 2024 19:02:36 +0200
-Subject: [PATCH] fix unsupported linker option
+Date: Wed, 9 Oct 2024 09:38:33 +0200
+Subject: [PATCH 2/8] fix-unsupported-linker-option
 
 ---
  fairseq2n/cmake/base.cmake | 2 +-

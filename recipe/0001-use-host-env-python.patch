@@ -1,7 +1,7 @@
-From 3c90d32b1363a03a277449271c6b755f5c7fa1c8 Mon Sep 17 00:00:00 2001
+From 8f8e3f24b7d6343f81ab0c847d5023d4e1e247fa Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
-Date: Fri, 4 Oct 2024 14:38:59 +0200
-Subject: [PATCH] use host env python
+Date: Wed, 9 Oct 2024 09:38:22 +0200
+Subject: [PATCH 1/8] use-host-env-python
 
 ---
  fairseq2n/cmake/modules/FindTorch.cmake | 8 ++++----

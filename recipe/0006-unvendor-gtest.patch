@@ -1,31 +1,26 @@
-From 9d7e5a541647d0beb5d6360d4f727b09e475b4a8 Mon Sep 17 00:00:00 2001
+From 5f459e93335c166f9693b558858d63a823c56711 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Thu, 10 Oct 2024 21:16:46 +0200
-Subject: [PATCH] unvendor gtest
+Subject: [PATCH 6/8] unvendor gtest
 
 ---
- fairseq2n/CMakeLists.txt | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ fairseq2n/CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
-index 8022c0c3..7161bde3 100644
+index 09607619..fd7a42d5 100644
 --- a/fairseq2n/CMakeLists.txt
 +++ b/fairseq2n/CMakeLists.txt
-@@ -204,9 +204,11 @@ fairseq2n_add_zip()
+@@ -204,7 +204,8 @@ if(FAIRSEQ2N_BUILD_PYTHON_BINDINGS)
+ endif()
  
- find_package(pybind11)
- 
--if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
+ if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
 -    fairseq2n_add_gtest()
--endif()
-+# if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
-+#     fairseq2n_add_gtest()
-+# endif()
-+
-+find_package(GTest)
++    # fairseq2n_add_gtest()
++    find_package(GTest REQUIRED)
+ endif()
  
  # ------------------------------------------------------------
- # CUDA
 -- 
 2.39.5 (Apple Git-154)
 
