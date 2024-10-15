@@ -75,6 +75,7 @@ requirements:
     - tqdm >=4.62
     - typing_extensions >=4.3  # [py<310]
     - libiconv  # [osx]
+    - libsndfile
     - kaldi-native-fbank 1.17+1_740f131
 
   test:
