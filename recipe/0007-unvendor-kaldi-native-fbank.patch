@@ -1,0 +1,27 @@
+From ec11473b3ce8be305453ab37d612a1eca811c415 Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Fri, 11 Oct 2024 11:17:40 +0200
+Subject: [PATCH 7/8] unvendor kaldi-native-fbank
+
+---
+ fairseq2n/CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
+index fd7a42d5..3cd6efa2 100644
+--- a/fairseq2n/CMakeLists.txt
++++ b/fairseq2n/CMakeLists.txt
+@@ -190,7 +190,9 @@ set(CMAKE_INCLUDE_PATH "$ENV{PREFIX}/include")
+ 
+ find_package(fmt REQUIRED)
+ 
+-fairseq2n_add_kaldi_native_fbank()
++# fairseq2n_add_kaldi_native_fbank()
++
++find_package(kaldi-native-fbank REQUIRED)
+ 
+ fairseq2n_add_natsort()
+ 
+-- 
+2.39.5 (Apple Git-154)
+
