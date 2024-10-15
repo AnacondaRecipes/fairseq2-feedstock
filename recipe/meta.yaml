@@ -54,7 +54,7 @@ requirements:
     - wheel
     - setuptools >=67.8
     - tbb-devel 2021.8.0  # [(linux or osx) and x86_64]
-    - packaging 24.1
+    - packaging 23.1
     - pytorch 2.3.0
     - libsndfile 1.2.2
     # unvendored host dependencies
@@ -69,7 +69,7 @@ requirements:
     - jiwer >=3.0
     - numpy >=1.23
     - overrides >=7.3
-    - packaging >=23.1
+    - packaging >=23.1,<24
     - pyyaml >=6.0
     - sacrebleu >=2.3
     - pytorch >=1.12.1
