@@ -80,13 +80,17 @@ requirements:
     - libsndfile
     - kaldi-native-fbank 1.17+1_740f131
 
-  test:
-    imports:
-      - fairseq2
-    commands:
-      - pip check
-    requires:
-      - pip
+test:
+  source_files:
+    - tests
+  imports:
+    - fairseq2
+  commands:
+    - pip check
+    - pytest -vv tests
+  requires:
+    - pip
+    - pytest
 
 about:
   home: https://github.com/facebookresearch/fairseq2
