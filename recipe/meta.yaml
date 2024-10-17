@@ -53,7 +53,7 @@ requirements:
     - pip
     - wheel
     - setuptools >=67.8
-    - tbb-devel 2021.8.0  # [(linux or osx) and x86_64]
+    - tbb-devel 2021.8.0  # [x86_64]
     - packaging 23.1
     - pytorch 2.3.0
     - libsndfile 1.2.2
@@ -78,6 +78,7 @@ requirements:
     - typing_extensions >=4.3  # [py<310]
     - libiconv  # [osx]
     - libsndfile
+    - tbb-devel 2021.8.0  # [x86_64]
     - kaldi-native-fbank 1.17+1_740f131
 
 test:
