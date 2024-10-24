@@ -20,7 +20,7 @@ cmake \
     -DTORCH_API_INCLUDE_DIR=$PREFIX/lib/python${PY_VER}/site-packages/torch/include/torch/csrc/api/include \
     -DTORCH_INCLUDE_DIR=$PREFIX/lib/python${PY_VER}/site-packages/torch/include \
     -DC10_LIBRARY=$PREFIX/lib/python${PY_VER}/site-packages/torch/lib/libc10.${extension} \
-    -GNinja -B build
+    $CMAKE_ARGS -GNinja -B build
 cmake --build build
 
 cd $SRC_DIR/fairseq2n/python
