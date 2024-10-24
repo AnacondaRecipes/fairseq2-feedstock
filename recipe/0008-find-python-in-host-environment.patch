@@ -1,0 +1,43 @@
+From db3543fa22c98a51196acf31681cf1489169a313 Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Thu, 24 Oct 2024 15:21:19 -0500
+Subject: [PATCH 8/9] find python in host environment
+
+---
+ fairseq2n/CMakeLists.txt                               | 6 ++++--
+ fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt | 2 +-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
+index 3cd6efa2..738817d7 100644
+--- a/fairseq2n/CMakeLists.txt
++++ b/fairseq2n/CMakeLists.txt
+@@ -167,8 +167,10 @@ endif()
+ find_package(Torch 1.13 REQUIRED)
+ 
+ if(FAIRSEQ2N_BUILD_PYTHON_BINDINGS)
+-    find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+-    if(Python3_VERSION VERSION_LESS 3.8)
++    set(Python_EXECUTABLE $ENV{PREFIX}/bin/python)
++    find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
++    message(STATUS "Python_EXECUTABLE ${Python_EXECUTABLE}")
++    if(Python_VERSION VERSION_LESS 3.8)
+         message(FATAL_ERROR "fairseq2n requires CPython 3.8 or greater!")
+     endif()
+ endif()
+diff --git a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
+index da0455e5..95dce0dc 100644
+--- a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
++++ b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
+@@ -8,7 +8,7 @@
+ # Target: py_bindings
+ # ------------------------------------------------------------
+ 
+-Python3_add_library(py_bindings WITH_SOABI)
++Python_add_library(py_bindings WITH_SOABI)
+ 
+ set_property(TARGET py_bindings PROPERTY OUTPUT_NAME bindings)
+ 
+-- 
+2.39.5 (Apple Git-154)
+

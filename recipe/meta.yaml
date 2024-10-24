@@ -16,10 +16,12 @@ source:
     - 0005-unvendor-pybind11.patch
     - 0006-unvendor-gtest.patch
     - 0007-unvendor-kaldi-native-fbank.patch
+    - 0008-find-python-in-host-environment.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1
-  skip: True  # [py<38 or py>311]
+  skip: True  # [py<38]
+  skip: True  # [py>311]
   # skip s390x because of missing libsndfile
   skip: True  # [s390x]
   # win officially not supported by upstream as per

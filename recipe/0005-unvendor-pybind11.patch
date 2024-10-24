@@ -1,7 +1,7 @@
 From 59a8fcab33faa4bff1c6bd1353ca3327f42f282d Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Thu, 10 Oct 2024 21:01:34 +0200
-Subject: [PATCH 5/8] unvendor pybind11
+Subject: [PATCH 5/9] unvendor pybind11
 
 ---
  fairseq2n/CMakeLists.txt | 3 ++-
