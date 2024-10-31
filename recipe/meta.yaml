@@ -17,6 +17,7 @@ source:
     - 0006-unvendor-gtest.patch
     - 0007-unvendor-kaldi-native-fbank.patch
     - 0008-find-python-in-host-environment.patch
+    - 0009-Fix-PyTorch-2.3-BC-breaking-changes-497.patch
 
 build:
   # skip py312 because it's supported only from 0.2.1

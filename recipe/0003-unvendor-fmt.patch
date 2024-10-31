@@ -1,7 +1,7 @@
 From fd863e9b6247851c2350bb68ab69145e18ed5336 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Wed, 9 Oct 2024 09:38:44 +0200
-Subject: [PATCH 3/9] unvendor-fmt
+Subject: [PATCH 03/10] unvendor-fmt
 
 ---
  fairseq2n/CMakeLists.txt                               | 7 ++++++-

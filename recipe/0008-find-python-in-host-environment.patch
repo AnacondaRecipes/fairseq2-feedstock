@@ -1,7 +1,7 @@
 From db3543fa22c98a51196acf31681cf1489169a313 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Thu, 24 Oct 2024 15:21:19 -0500
-Subject: [PATCH 8/9] find python in host environment
+Subject: [PATCH 08/10] find python in host environment
 
 ---
  fairseq2n/CMakeLists.txt                               | 6 ++++--
