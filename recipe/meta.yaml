@@ -41,7 +41,7 @@ build:
     - libsndfile
     # gtest is only used to generate the 'tests' CMake targets
     - gtest
-    - tbb-devel  # [x86_64]
+    #- tbb-devel  # [x86_64]
   number: 0
 
 requirements:
@@ -83,7 +83,7 @@ requirements:
     - typing_extensions >=4.3  # [py<310]
     - libiconv  # [osx]
     - libsndfile
-    - tbb-devel 2021.8.0  # [x86_64]
+    #- tbb-devel 2021.8.0  # [x86_64]
     - kaldi-native-fbank 1.17+1_740f131
 
 test:
