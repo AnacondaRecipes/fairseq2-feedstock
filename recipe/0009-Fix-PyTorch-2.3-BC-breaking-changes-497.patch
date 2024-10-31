@@ -1,7 +1,7 @@
 From d1e94fcfe7728240ae41d5febb0c314e03096814 Mon Sep 17 00:00:00 2001
 From: Can Balioglu <cbalioglu@users.noreply.github.com>
 Date: Fri, 3 May 2024 14:54:39 -0400
-Subject: [PATCH 09/10] Fix PyTorch 2.3 BC breaking changes (#497)
+Subject: [PATCH 09/11] Fix PyTorch 2.3 BC breaking changes (#497)
 
 ---
  src/fairseq2/optim/dynamic_loss_scaler.py | 54 ++++++++++++++++-------

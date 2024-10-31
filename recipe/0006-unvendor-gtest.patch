@@ -1,7 +1,7 @@
 From 5f459e93335c166f9693b558858d63a823c56711 Mon Sep 17 00:00:00 2001
 From: Jack Olivieri <jolivieri@anaconda.com>
 Date: Thu, 10 Oct 2024 21:16:46 +0200
-Subject: [PATCH 06/10] unvendor gtest
+Subject: [PATCH 06/11] unvendor gtest
 
 ---
  fairseq2n/CMakeLists.txt | 3 ++-
