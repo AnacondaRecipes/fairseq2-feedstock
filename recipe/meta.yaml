@@ -12,7 +12,6 @@ source:
     - 0001-use-host-env-python.patch
     - 0002-fix-unsupported-linker-option.patch
     - 0003-unvendor-fmt.patch
-    - 0004-unvendor-sentencepiece-and-zip.patch
     - 0005-unvendor-pybind11.patch
     - 0006-unvendor-gtest.patch
     - 0007-unvendor-kaldi-native-fbank.patch
@@ -63,7 +62,6 @@ requirements:
     # unvendored host dependencies
     - fmt 9.1.0
     - kaldi-native-fbank 1.17+1_740f131
-    - sentencepiece 0.1.99
     - pybind11 2.12.0
     - gtest 1.14.0
   run:
