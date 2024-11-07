@@ -16,7 +16,7 @@ source:
     - 0006-unvendor-gtest.patch
     - 0007-unvendor-kaldi-native-fbank.patch
     - 0008-find-python-in-host-environment.patch
-    - 0009-patch-out-failing-TestSampleOp-tests.patch
+    - 0009-patch-out-failing-TestSampleOp-tests.patch  # [osx]
 
 build:
   # skip py312 because it's supported only from 0.2.1
