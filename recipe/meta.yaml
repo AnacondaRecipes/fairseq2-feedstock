@@ -6,7 +6,9 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/facebookresearch/fairseq2/archive/refs/tags/v0.2.0.tar.gz
+  # fairseq2 needs to be cloned from gh repo to pull .gitmodules and clone some of the necessary vendored dependencies
+  git_url: https://github.com/facebookresearch/fairseq2
+  git_rev: v0.2.0
   patches:
     - 0001-use-host-env-python.patch
     - 0002-fix-unsupported-linker-option.patch
