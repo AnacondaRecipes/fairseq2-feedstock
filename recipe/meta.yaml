@@ -34,7 +34,6 @@ build:
     - $RPATH/libtorch_cpu.dylib     # [osx]
     - $RPATH/libtorch_python.dylib  # [osx]
     - $RPATH/libc10.dylib           # [osx]
-    - "**/libsndfile.*.dylib"       # [osx]
   ignore_run_exports:
     - libsndfile
     # gtest is only used to generate the 'tests' CMake targets
