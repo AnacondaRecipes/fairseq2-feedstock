@@ -57,7 +57,10 @@ requirements:
     - setuptools >=67.8
     - tbb-devel 2021.8.0  # [x86_64]
     - packaging 23.1
-    - pytorch 2.3.0
+    # pin the appropriate version of pytorch that is compatible with fairseq2.
+    # higher versions (e.g. 2.3.0) result in API breakage with undefined symbols in torch/lib/libc10.dylib
+    # required by fairseq2n/lib/libfairseq2n.0.dylib. Additionally, 2.3.0 yields segfaults on x86_64 platforms
+    - pytorch 2.2.0
     - libsndfile 1.2.2
     # unvendored host dependencies
     - fmt 9.1.0
