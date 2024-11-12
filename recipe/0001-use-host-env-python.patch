@@ -1,0 +1,52 @@
+From 8f8e3f24b7d6343f81ab0c847d5023d4e1e247fa Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Wed, 9 Oct 2024 09:38:22 +0200
+Subject: [PATCH 01/11] use-host-env-python
+
+---
+ fairseq2n/cmake/modules/FindTorch.cmake | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/fairseq2n/cmake/modules/FindTorch.cmake b/fairseq2n/cmake/modules/FindTorch.cmake
+index c7b7b7f9..1e33b669 100644
+--- a/fairseq2n/cmake/modules/FindTorch.cmake
++++ b/fairseq2n/cmake/modules/FindTorch.cmake
+@@ -9,7 +9,7 @@ include(FindPackageHandleStandardArgs)
+ macro(__torch_determine_version)
+     execute_process(
+         COMMAND
+-            ${Python3_EXECUTABLE} -c "import torch; print(torch.__version__)"
++            $ENV{PYTHON} -c "import torch; print(torch.__version__)"
+         OUTPUT_VARIABLE
+             TORCH_PEP440_VERSION
+         OUTPUT_STRIP_TRAILING_WHITESPACE
+@@ -31,7 +31,7 @@ endmacro()
+ macro(__torch_determine_cuda_version)
+     execute_process(
+         COMMAND
+-            ${Python3_EXECUTABLE} -c "import torch; print(torch.version.cuda or '')"
++            $ENV{PYTHON} -c "import torch; print(torch.version.cuda or '')"
+         OUTPUT_VARIABLE
+             TORCH_CUDA_VERSION
+         OUTPUT_STRIP_TRAILING_WHITESPACE
+@@ -63,7 +63,7 @@ find_package(Python3 QUIET COMPONENTS Interpreter)
+ if(Python3_Interpreter_FOUND)
+     execute_process(
+         COMMAND
+-            ${Python3_EXECUTABLE} -c "import torch; print(torch.__file__)"
++            $ENV{PYTHON} -c "import torch; print(torch.__file__)"
+         OUTPUT_VARIABLE
+             torch_init_file
+         OUTPUT_STRIP_TRAILING_WHITESPACE
+@@ -138,7 +138,7 @@ if(NOT TARGET torch_cxx11_abi)
+     if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+         execute_process(
+             COMMAND
+-                ${Python3_EXECUTABLE} -c "import torch; print(torch.compiled_with_cxx11_abi())"
++                $ENV{PYTHON} -c "import torch; print(torch.compiled_with_cxx11_abi())"
+             OUTPUT_VARIABLE
+                 TORCH_CXX11_ABI
+             OUTPUT_STRIP_TRAILING_WHITESPACE
+-- 
+2.39.5 (Apple Git-154)
+

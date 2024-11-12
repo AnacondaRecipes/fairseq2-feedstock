@@ -1,0 +1,59 @@
+From fd863e9b6247851c2350bb68ab69145e18ed5336 Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Wed, 9 Oct 2024 09:38:44 +0200
+Subject: [PATCH 03/11] unvendor-fmt
+
+---
+ fairseq2n/CMakeLists.txt                               | 7 ++++++-
+ fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt | 3 ++-
+ fairseq2n/src/fairseq2n/CMakeLists.txt                 | 2 +-
+ 3 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/fairseq2n/CMakeLists.txt b/fairseq2n/CMakeLists.txt
+index 54743625..18112406 100644
+--- a/fairseq2n/CMakeLists.txt
++++ b/fairseq2n/CMakeLists.txt
+@@ -183,7 +183,12 @@ endif()
+ 
+ add_subdirectory(third-party)
+ 
+-fairseq2n_add_fmt()
++# fairseq2n_add_fmt()
++
++set(CMAKE_LIBRARY_PATH "$ENV{PREFIX}/lib")
++set(CMAKE_INCLUDE_PATH "$ENV{PREFIX}/include")
++
++find_package(fmt REQUIRED)
+ 
+ fairseq2n_add_kaldi_native_fbank()
+ 
+diff --git a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
+index 2a7d1e52..da0455e5 100644
+--- a/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
++++ b/fairseq2n/python/src/fairseq2n/bindings/CMakeLists.txt
+@@ -36,7 +36,8 @@ target_include_directories(py_bindings PRIVATE ${PROJECT_SOURCE_DIR}/python/src)
+ 
+ target_link_libraries(py_bindings
+     PRIVATE
+-        pybind11::module fmt::fmt kuba-zip fairseq2n torch_python
++        #pybind11::module fmt::fmt kuba-zip fairseq2n torch_python
++        pybind11::module fmt kuba-zip fairseq2n torch_python
+ )
+ 
+ fairseq2n_set_link_options(py_bindings ALLOW_UNDEFINED_SYMBOLS)
+diff --git a/fairseq2n/src/fairseq2n/CMakeLists.txt b/fairseq2n/src/fairseq2n/CMakeLists.txt
+index 9f752d58..8e959e9f 100644
+--- a/fairseq2n/src/fairseq2n/CMakeLists.txt
++++ b/fairseq2n/src/fairseq2n/CMakeLists.txt
+@@ -106,7 +106,7 @@ target_link_libraries(fairseq2n
+     PRIVATE
+         ${CMAKE_DL_LIBS}
+     PRIVATE
+-        fmt::fmt
++        fmt
+         Iconv::Iconv
+         kaldi-native-fbank::core
+         kuba-zip
+-- 
+2.39.5 (Apple Git-154)
+

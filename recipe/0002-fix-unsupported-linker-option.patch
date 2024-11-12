@@ -1,0 +1,25 @@
+From a9a87078f91d832230f67b62e3e95fb1eb06b6e8 Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Wed, 9 Oct 2024 09:38:33 +0200
+Subject: [PATCH 02/11] fix-unsupported-linker-option
+
+---
+ fairseq2n/cmake/base.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fairseq2n/cmake/base.cmake b/fairseq2n/cmake/base.cmake
+index 5d9f3425..68afb7d8 100644
+--- a/fairseq2n/cmake/base.cmake
++++ b/fairseq2n/cmake/base.cmake
+@@ -155,7 +155,7 @@ function(fairseq2n_set_link_options target)
+             target_link_options(${target} PRIVATE LINKER:-undefined,error)
+         else()
+             target_link_options(${target} PRIVATE
+-                LINKER:-undefined,dynamic_lookup LINKER:-no_fixup_chains
++                LINKER:-undefined,dynamic_lookup
+             )
+         endif()
+ 
+-- 
+2.39.5 (Apple Git-154)
+
