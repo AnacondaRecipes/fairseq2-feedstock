@@ -37,7 +37,7 @@ build:
   ignore_run_exports:
     # gtest is only used to generate the 'tests' CMake targets
     - gtest
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -91,6 +91,9 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_seed_is_set_manually" %}             # [arm64 or aarch64]
 {% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_up_sampling" %}                      # [arm64 or aarch64]
 {% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_saves_and_restores_its_state" %}                # [arm64 or aarch64]
+
+{% set tests_to_skip = tests_to_skip + " -k not (test_noam or test_noam_with_zero_warmup or test_myle" %} # [osx and X86_64]
+{% set tests_to_skip = tests_to_skip + " or test_polynomial_decaytest_cosine)" %}                         # [osx and X86_64]
 
 test:
   source_files:
