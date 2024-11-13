@@ -37,7 +37,7 @@ build:
   ignore_run_exports:
     # gtest is only used to generate the 'tests' CMake targets
     - gtest
-  number: 0
+  number: 1
 
 requirements:
   build:
