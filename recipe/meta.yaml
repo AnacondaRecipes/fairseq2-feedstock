@@ -79,7 +79,6 @@ requirements:
     - kaldi-native-fbank 1.17+1_740f131
 
 # Assertion errors:
-{% set tests_to_skip = "" %}
 {% set tests_to_skip = "test_op_saves_and_restores_its_state" %}  # [not (osx and x86_64)]
 {% set tests_to_skip = tests_to_skip + " or test_op_works" %}  # [not (osx and x86_64)]
 {% set tests_to_skip = tests_to_skip + " or test_op_works_when_pipelines_have_different_lengths" %}  # [not (osx and x86_64)]
@@ -96,7 +95,8 @@ test:
   commands:
     # skipping on x86_64 because of missing tbb even though tbb is in environment
     - pip check  # [not x86_64]
-    - pytest -k "not ({{ tests_to_skip }})" -vv tests
+    - pytest -k "not ({{ tests_to_skip }})" -vv tests  # [not (osx and x86_64)]
+    - pytest -vv tests  # [osx and x86_64]
   requires:
     - pip  # [not (linux and x86_64)]
     - pytest
