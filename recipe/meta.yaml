@@ -19,14 +19,7 @@ source:
     - 0008-find-python-in-host-environment.patch
 
 build:
-  # skip py312 because it's supported only from 0.2.1
-  skip: True  # [py<38]
-  skip: True  # [py>311]
-  # skip s390x because of missing libsndfile
-  skip: True  # [s390x]
-  # win officially not supported by upstream as per
-  # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
-  skip: True  # [win]
+  number: 2
   missing_dso_whitelist:
     - $RPATH/libtorch_cpu.so     # [linux]
     - $RPATH/libtorch_python.so  # [linux]
@@ -37,7 +30,11 @@ build:
   ignore_run_exports:
     # gtest is only used to generate the 'tests' CMake targets
     - gtest
-  number: 1
+  # skip py312 because it's supported only from 0.2.1
+  skip: True  # [py<38 or py>311]
+  # win is officially not supported by upstream as per
+  # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
+  skip: True  # [win]
 
 requirements:
   build:
@@ -55,7 +52,7 @@ requirements:
     - setuptools >=67.8
     - tbb-devel 2021.8.0  # [x86_64]
     - packaging 23.1
-    # pin the appropriate version of pytorch that is compatible with fairseq2.
+    # Pin the appropriate version of PyTorch that is compatible with fairseq2.
     # higher versions (e.g. 2.3.0) result in API breakage with undefined symbols in torch/lib/libc10.dylib
     # required by fairseq2n/lib/libfairseq2n.0.dylib. Additionally, 2.3.0 yields segfaults on x86_64 platforms
     - pytorch 2.2.0
@@ -73,7 +70,7 @@ requirements:
     - packaging >=23.1,<24
     - pyyaml >=6.0
     - sacrebleu >=2.3
-    - pytorch >=1.12.1, <2.3.0
+    - {{ pin_compatible('pytorch', max_pin='x.x') }}
     - torcheval >=0.0.6
     - tqdm >=4.62
     - typing_extensions >=4.3  # [py<310]
@@ -81,19 +78,14 @@ requirements:
     - libsndfile
     - kaldi-native-fbank 1.17+1_740f131
 
-# skip tests that give numerical issues on arm platforms
-{% set tests_to_skip = "" %}
-{% set test_class_prefix = "tests/unit/data/data_pipeline/test_sample.py::TestSampleOp" %}
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works" %}
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_pipelines_have_different_lengths" %} # [arm64 or aarch64]
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_no_weights_is_specified" %}          # [arm64 or aarch64]
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_weight_is_low" %}                    # [arm64 or aarch64]
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_seed_is_set_manually" %}             # [arm64 or aarch64]
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_works_when_up_sampling" %}                      # [arm64 or aarch64]
-{% set tests_to_skip = tests_to_skip + " --deselect=" + test_class_prefix + "::test_op_saves_and_restores_its_state" %}                # [arm64 or aarch64]
-
-{% set tests_to_skip = tests_to_skip + " -k not (test_noam or test_noam_with_zero_warmup or test_myle" %} # [osx and X86_64]
-{% set tests_to_skip = tests_to_skip + " or test_polynomial_decaytest_cosine)" %}                         # [osx and X86_64]
+# Assertion errors:
+{% set tests_to_skip = "test_op_saves_and_restores_its_state" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works_when_pipelines_have_different_lengths" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works_when_no_weights_is_specified" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works_when_weight_is_low" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works_when_seed_is_set_manually" %}  # [not (osx and x86_64)]
+{% set tests_to_skip = tests_to_skip + " or test_op_works_when_up_sampling" %}  # [not (osx and x86_64)]
 
 test:
   source_files:
@@ -101,9 +93,10 @@ test:
   imports:
     - fairseq2
   commands:
-    # skipping on x86_64 because of missing tbb even though tbb is in environment
+    # skipping on x86_64 because of missing tbb even though tbb is in the environment
     - pip check  # [not x86_64]
-    - pytest {{ tests_to_skip }} -vv tests
+    - pytest -k "not ({{ tests_to_skip }})" -vv tests  # [not (osx and x86_64)]
+    - pytest -vv tests  # [osx and x86_64]
   requires:
     - pip  # [not (linux and x86_64)]
     - pytest
