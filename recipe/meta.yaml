@@ -32,7 +32,7 @@ build:
     - gtest
   # skip py312 because it's supported only from 0.2.1
   skip: True  # [py<38 or py>311]
-  # win officially not supported by upstream as per
+  # win is officially not supported by upstream as per
   # https://github.com/facebookresearch/fairseq2/blob/v0.2.0/README.md#installing-on-windows
   skip: True  # [win]
 
@@ -52,7 +52,7 @@ requirements:
     - setuptools >=67.8
     - tbb-devel 2021.8.0  # [x86_64]
     - packaging 23.1
-    # pin the appropriate version of pytorch that is compatible with fairseq2.
+    # Pin the appropriate version of PyTorch that is compatible with fairseq2.
     # higher versions (e.g. 2.3.0) result in API breakage with undefined symbols in torch/lib/libc10.dylib
     # required by fairseq2n/lib/libfairseq2n.0.dylib. Additionally, 2.3.0 yields segfaults on x86_64 platforms
     - pytorch 2.2.0
@@ -70,7 +70,7 @@ requirements:
     - packaging >=23.1,<24
     - pyyaml >=6.0
     - sacrebleu >=2.3
-    - pytorch 2.2.0
+    - {{ pin_compatible('pytorch', max_pin='x.x') }}
     - torcheval >=0.0.6
     - tqdm >=4.62
     - typing_extensions >=4.3  # [py<310]
@@ -93,7 +93,7 @@ test:
   imports:
     - fairseq2
   commands:
-    # skipping on x86_64 because of missing tbb even though tbb is in environment
+    # skipping on x86_64 because of missing tbb even though tbb is in the environment
     - pip check  # [not x86_64]
     - pytest -k "not ({{ tests_to_skip }})" -vv tests  # [not (osx and x86_64)]
     - pytest -vv tests  # [osx and x86_64]
