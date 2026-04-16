@@ -1,4 +1,5 @@
 anaconda_config_version: 1
 upstream_sources:
-  - github:
-      identifier: facebookresearch/fairseq2
+  - git:
+      identifier: https://github.com/facebookresearch/fairseq2
+      strip_prefix: v
